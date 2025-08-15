@@ -1,0 +1,39 @@
+[package]
+versioned_files = ["package.json"]
+
+[[workflows]]
+name = "release"
+
+[[workflows.steps]]
+type = "PrepareRelease"
+ignore_conventional_commits = true
+
+[[workflows]]
+name = "document-change"
+
+[[workflows.steps]]
+type = "CreateChangeFile"
+
+[[workflows]]
+name = "get-version"
+help_text = "Get the current version of the project"
+
+[[workflows.steps]]
+type = "Command"
+command = 'echo "$version"'
+
+[[workflows]]
+name = "pre-release"
+
+[[workflows.steps]]
+type = "BumpVersion"
+rule = "Pre"
+label = "rc"
+
+[[workflows.steps]]
+type = "PrepareRelease"
+ignore_conventional_commits = true
+
+[github]
+owner = "hazre"
+repo = "knope-prerelease-not-incrementing"
